@@ -11,3 +11,13 @@ class UserRegisterSchema(BaseModel):
     email: EmailStr = Field(max_length=50,examples=["user@gmail.com"])
     password: str = Field(min_length=8,examples=["12345678"])
     role: UserRole
+
+class UserLoginSchema(BaseModel):
+    email: EmailStr = Field(max_length=50,examples=["user@gmail.com"])
+    password: str = Field(min_length=8,examples=["12345678"])
+
+class UserResponse(BaseModel):
+    id: int
+    name: str = Field(min_length=3, max_length=50,examples=["user"])
+    email: EmailStr = Field(max_length=50,examples=["user@gmail.com"])
+    role: UserRole
