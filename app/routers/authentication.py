@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.schemas.user import UserRegisterSchema, UserLoginSchema, UserResponse
+from app.schemas.user import UserRegisterSchema, UserLoginSchema, UserResponse, LoginResponse
 from app.database import get_db, SessionLocal
 from app.models.user import User
 from app.models.role import Role
@@ -8,10 +8,16 @@ from app.auth import make_hash, verify_hash, create_access_token,get_current_use
 
 router = APIRouter(prefix="/auth",tags=["Authentication"])
 
-@router.post("/register")
+@router.post("/register", response_model=UserResponse)
 def register(data: UserRegisterSchema, db = Depends(get_db)):
-    
     role = db.query(Role).filter(Role.name == data.role).first()
+
+    existing_user = db.query(User).filter(User.email == data.email).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=422,
+            detail="Email Already Exists"
+        )
     # print(type(teacher_role))
 
     # return teacher_role
@@ -29,7 +35,7 @@ def register(data: UserRegisterSchema, db = Depends(get_db)):
     db.refresh(user)
     return user
 
-@router.post("/login")
+@router.post("/login", response_model=LoginResponse)
 def login(cred: UserLoginSchema, db = Depends(get_db)):
     user  = db.query(User).filter(User.email == cred.email).first()
     if not user:
@@ -51,15 +57,9 @@ def login(cred: UserLoginSchema, db = Depends(get_db)):
         "token_type": "Bearer"
     }
 
-@router.get("/profile")
-def profile(user = Depends(RoleChecker(["admin","student"]))):
+@router.get("/profile", response_model=UserResponse)
+def profile(user = Depends(PermissionCheck("view profile"))):
     return user
-
-
-@router.get("/create-teacher")
-def create_teacher(user = Depends(PermissionCheck("add teacher"))):
- 
-    return "you can create teacher"
     
 
     

@@ -66,32 +66,6 @@ def get_current_user(db=Depends(get_db),cred: HTTPAuthorizationCredentials = Dep
             status_code=401,
             detail="invalid token"
         )
-    # except:
-    #     raise HTTPException(
-    #         status_code=401,
-    #         detail="unknown error"
-    #     )
-
-
-def get_current_user(db=Depends(get_db), cred: HTTPAuthorizationCredentials = Depends(session)):
-    credentials_exc = HTTPException(
-        status_code=401,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-
-    try:
-        payload = jwt.decode(cred.credentials, secret_key, algorithm)
-        user_id = payload.get("id")
-        if user_id is None:
-            raise credentials_exc
-    except jwt.PyJWTError:
-        raise credentials_exc
-
-    user = db.get(User, user_id)
-    if user is None:
-        raise credentials_exc
-    return user
 
 class RoleChecker:
     def __init__(self, allowed_roles: list[str]):

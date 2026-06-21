@@ -1,6 +1,9 @@
 from app.database import Base
 from sqlalchemy import String, Text, Column, Enum as sqlEnum
 from sqlalchemy.orm import Mapped, MappedColumn, relationship
+from app.database import get_db
+from fastapi import Depends, HTTPException
+from app.models.role import Role
 
 from enum import Enum
 
@@ -41,4 +44,13 @@ class User(Base):
                     role.name
                     for role in self.roles
                 }
+    
+    def assign_role(self, role: Role):
+        if not role:
+            raise HTTPException(
+                status_code=404,
+                detail="role does not exists"
+            )
+        
+        self.roles.append(role)
     
