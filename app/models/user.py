@@ -31,6 +31,18 @@ class User(Base):
         lazy="selectin"
     )
 
+    subjects: Mapped[list["Subject"]] = relationship(
+        secondary="student_subjects",
+        back_populates="students",
+        lazy="selectin"
+    )
+
+    taught_subjects: Mapped[list["Subject"]] = relationship(
+        secondary="teacher_subjects",
+        back_populates="teachers",
+        lazy="selectin"
+    )
+
     @property
     def permissions(self):
         return {
