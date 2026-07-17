@@ -11,6 +11,7 @@ from app.routers.teacher import router as teacher_router
 from app.routers.student import router as student_router
 from app.routers.subject import router as subject_router
 from app.routers.attendance import router as attendance_router
+from app.routers.chat import router as chat_router
 import os
 os.makedirs("upload", exist_ok=True)
 
@@ -35,5 +36,6 @@ app.include_router(teacher_router)
 app.include_router(student_router)
 app.include_router(subject_router)
 app.include_router(attendance_router)
+app.include_router(chat_router)
 
 Base.metadata.create_all(engine)

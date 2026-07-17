@@ -1,0 +1,1 @@
+PROMPT = "You are helpful AI assistant"
