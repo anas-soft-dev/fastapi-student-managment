@@ -17,7 +17,7 @@ from app.models.role import Role, Permission
 # All permissions used across the application routers
 PERMISSIONS = [
     # profile
-    "view profile",
+    "view profile","update profile",
     # teacher
     "view teacher", "add teacher", "edit teacher", "delete teacher",
     # student
@@ -36,6 +36,7 @@ ROLE_PERMISSIONS = {
     "admin": PERMISSIONS,  # admin gets everything
     "teacher": [
         "view profile",
+        "update profile",
         "view student",
         "view subject",
         "assign subject", "revoke subject",
@@ -44,6 +45,7 @@ ROLE_PERMISSIONS = {
     ],
     "student": [
         "view profile",
+        "update profile",
         "view subject",
         "view own attendance",
     ],

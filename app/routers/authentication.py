@@ -62,4 +62,22 @@ def profile(user = Depends(PermissionCheck("view profile"))):
     return user
     
 
+from fastapi import Form, UploadFile, File
+import uuid
+@router.post("/profile-image")
+async def update_profile(name = Form(),image: UploadFile = File(...),user = Depends(PermissionCheck("update profile")), db = Depends(get_db)):
+    filename = f"{uuid.uuid4()}_{image.filename}"
+    path =  f"upload/{filename}"
+
+    with open(path,"wb") as buffer:
+        data = await image.read()
+        buffer.write(data)
+
+    user.name = name
+    user.image = path
+    db.commit()
+    db.refresh(user)
+
+    return user
+
     

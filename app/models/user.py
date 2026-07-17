@@ -25,6 +25,8 @@ class User(Base):
                                       
     password: Mapped[str] = MappedColumn(Text)
 
+    image: Mapped[str] = MappedColumn(String(255), nullable=True)
+
     roles: Mapped[list["Role"]] = relationship(
         secondary="user_roles",
         back_populates="users",

@@ -11,6 +11,8 @@ from app.routers.teacher import router as teacher_router
 from app.routers.student import router as student_router
 from app.routers.subject import router as subject_router
 from app.routers.attendance import router as attendance_router
+import os
+os.makedirs("upload", exist_ok=True)
 
 app = FastAPI()
 

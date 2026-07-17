@@ -5,7 +5,7 @@ build/
 dist/
 wheels/
 *.egg-info
-
+upload
 .env
 
 # Virtual environments
