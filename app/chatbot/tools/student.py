@@ -32,18 +32,18 @@ def make_student_tools(db):
 
         return "\n".join(_format_student(user) for user in users)
 
-    @tool
-    def add_student(data: UserRegisterSchema) -> str:
-        existing_user = _student_query.where(User.email == data.email).first()
-        if existing_user:
-            return f"{data.email} already exist"
-        user = User(**data.model_dump())
-        role = db.query(Role).where(Role.name == "student").first()
-        user.assign_role(role)
+    # @tool
+    # def add_student(data: UserRegisterSchema) -> str:
+    #     existing_user = _student_query.where(User.email == data.email).first()
+    #     if existing_user:
+    #         return f"{data.email} already exist"
+    #     user = User(**data.model_dump())
+    #     role = db.query(Role).where(Role.name == "student").first()
+    #     user.assign_role(role)
 
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-        return f"{user}"
+    #     db.add(user)
+    #     db.commit()
+    #     db.refresh(user)
+    #     return f"{user}"
 
-    return [list_students, search_student, add_student]
+    return [list_students, search_student]
