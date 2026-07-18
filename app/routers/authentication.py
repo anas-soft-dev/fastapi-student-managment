@@ -4,6 +4,8 @@ from app.database import get_db, SessionLocal
 from app.models.user import User
 from app.models.role import Role
 from app.auth import make_hash, verify_hash, create_access_token,get_current_user, RoleChecker, PermissionCheck
+from fastapi import Form, UploadFile, File
+import uuid
 
 
 router = APIRouter(prefix="/auth",tags=["Authentication"])
@@ -62,8 +64,6 @@ def profile(user = Depends(PermissionCheck("view profile"))):
     return user
     
 
-from fastapi import Form, UploadFile, File
-import uuid
 @router.post("/profile-image")
 async def update_profile(name = Form(),image: UploadFile = File(...),user = Depends(PermissionCheck("update profile")), db = Depends(get_db)):
     filename = f"{uuid.uuid4()}_{image.filename}"
