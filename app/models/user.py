@@ -1,8 +1,7 @@
 from app.database import Base
-from sqlalchemy import String, Text, Column, Enum as sqlEnum
+from sqlalchemy import String, Text
 from sqlalchemy.orm import Mapped, MappedColumn, relationship
-from app.database import get_db
-from fastapi import Depends, HTTPException
+from fastapi import HTTPException
 from app.models.role import Role
 
 from enum import Enum
@@ -10,7 +9,7 @@ from enum import Enum
 class UserRole(str,Enum):
     admin = "admin"
     student = "student"
-    teacher = "teacher"
+    teacher = "teacher" 
 
 class User(Base):
     __tablename__ = "users"

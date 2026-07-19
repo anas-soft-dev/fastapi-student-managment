@@ -1,10 +1,8 @@
-from pydantic import BaseModel, Field, EmailStr, ConfigDict, field_validator
+from pydantic import BaseModel, Field, EmailStr, field_validator
 from enum import Enum
-from app.models.role import Role
 from app.auth import make_hash
 
 class UserRole(str,Enum):
-    admin = "admin"
     student = "student"
     teacher = "teacher"
 
@@ -12,6 +10,7 @@ class UserRegisterSchema(BaseModel):
     name: str = Field(min_length=3, max_length=50,examples=["user"])
     email: EmailStr = Field(max_length=50,examples=["user@gmail.com"])
     password: str = Field(min_length=8,examples=["12345678"])
+    role:UserRole=Field(examples=["student","teacher"])
     @field_validator("password")
     @classmethod
     def hash_password(cls, value):

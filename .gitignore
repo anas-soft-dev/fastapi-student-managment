@@ -10,3 +10,4 @@ upload
 
 # Virtual environments
 .venv
+.history

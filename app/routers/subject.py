@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from app.database import get_db
 from app.models.subject import Subject
 from app.models.user import User
-from app.models.role import Role
 from app.schemas.subject import AllSubjectResponse, SubjectSchema, SubjectResponse
 from app.schemas.user import AllUserResponse
 from app.auth import PermissionCheck
