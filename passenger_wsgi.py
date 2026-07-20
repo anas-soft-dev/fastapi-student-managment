@@ -1,4 +1,4 @@
-from asgiref.wsgi import AsgiToWsgi
+from a2wsgi import ASGIMiddleware
 from main import app
 
-application = AsgiToWsgi(app)
+application = ASGIMiddleware(app)
