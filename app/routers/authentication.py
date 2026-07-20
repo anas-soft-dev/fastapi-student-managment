@@ -10,7 +10,7 @@ router = APIRouter(prefix="/auth",tags=["Authentication"])
 
 @router.post("/register", response_model=UserResponse)
 def register(data: UserRegisterSchema, db = Depends(get_db)):
-    role = db.query(Role).filter(Role.name == data.role).first()
+    role = db.query(Role).filter(Role.name == "student").first()
 
     existing_user = db.query(User).filter(User.email == data.email).first()
     if existing_user:
