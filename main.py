@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_DIR = os.path.join(BASE_DIR, "upload")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-app = FastAPI()
+app = FastAPI(debug=True)
 
 # CORS — allow the Next.js frontend to call the API (handles OPTIONS preflight).
 # Set ALLOWED_ORIGINS in .env as a comma-separated list to add deployed frontends.
