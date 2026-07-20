@@ -14,7 +14,12 @@ from app.routers.subject import router as subject_router
 from app.routers.attendance import router as attendance_router
 from app.routers.chat import router as chat_router
 import os
-os.makedirs("upload", exist_ok=True)
+
+# Anchor to this file, not the process CWD — lswsgi/Passenger do not guarantee
+# the working directory is the app root, and a relative path there fails at import.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_DIR = os.path.join(BASE_DIR, "upload")
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app = FastAPI()
 
@@ -31,7 +36,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/upload", StaticFiles(directory="upload"), name="upload")
+app.mount("/upload", StaticFiles(directory=UPLOAD_DIR), name="upload")
 
 app.include_router(auth_router)
 app.include_router(teacher_router)
