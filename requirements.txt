@@ -64,7 +64,9 @@ h11==0.16.0
     #   httpcore
     #   uvicorn
 httpcore==1.0.9
-    # via httpx
+    # via
+    #   httpx
+    #   openrouter
 httptools==0.8.0
     # via uvicorn
 httpx==0.28.1
@@ -73,6 +75,7 @@ httpx==0.28.1
     #   fastapi-cloud-cli
     #   langgraph-sdk
     #   langsmith
+    #   openrouter
 idna==3.18
     # via
     #   anyio
@@ -83,6 +86,8 @@ jinja2==3.1.6
     # via fastapi
 jsonpatch==1.33
     # via langchain-core
+jsonpath-python==1.1.6
+    # via openrouter
 jsonpointer==3.1.1
     # via jsonpatch
 langchain==1.3.14
@@ -90,10 +95,13 @@ langchain==1.3.14
 langchain-core==1.4.9
     # via
     #   langchain
+    #   langchain-openrouter
     #   langgraph
     #   langgraph-checkpoint
     #   langgraph-prebuilt
     #   langgraph-sdk
+langchain-openrouter==0.2.6
+    # via sms
 langchain-protocol==0.0.18
     # via
     #   langchain-core
@@ -116,6 +124,8 @@ markupsafe==3.0.3
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
+openrouter==0.11.46
+    # via langchain-openrouter
 orjson==3.11.9
     # via
     #   langgraph-sdk
@@ -128,7 +138,7 @@ packaging==26.2
     #   langsmith
 passlib==1.7.4
     # via sms
-pydantic==2.13.4
+pydantic==2.12.5
     # via
     #   fastapi
     #   fastapi-cloud-cli
@@ -136,9 +146,10 @@ pydantic==2.13.4
     #   langchain-core
     #   langgraph
     #   langsmith
+    #   openrouter
     #   pydantic-extra-types
     #   pydantic-settings
-pydantic-core==2.46.4
+pydantic-core==2.41.5
     # via pydantic
 pydantic-extra-types==2.11.1
     # via fastapi
