@@ -12,10 +12,10 @@ class UserRegisterSchema(BaseModel):
     name: str = Field(min_length=3, max_length=50,examples=["user"])
     email: EmailStr = Field(max_length=50,examples=["user@gmail.com"])
     password: str = Field(min_length=8,examples=["12345678"])
-    @field_validator("password")
-    @classmethod
-    def hash_password(cls, value):
-        return make_hash(value)
+    # @field_validator("password")
+    # @classmethod
+    # def hash_password(cls, value):
+    #     return make_hash(value)
         
 
 class UserLoginSchema(BaseModel):
